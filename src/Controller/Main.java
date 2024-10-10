@@ -19,7 +19,9 @@ public class Main {
         window.setIconImage(new ImageIcon("player1_tank_up.png").getImage());
         System.out.printf("1");
         
-        
+        if (true)
+        System.out.printf("2");
+        //nhat quang ngu nhu bo
     }
     
 }
