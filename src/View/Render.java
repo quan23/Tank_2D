@@ -30,6 +30,7 @@ public class Render extends JPanel{
         player.getIcon().paintIcon(this, g, brick.getX(), brick.getY());
         player.getIcon().paintIcon(this, g, brick.getX()+50, brick.getY()+50);
         g2d.setTransform(old);
+        brick.getIcon().paintIcon(this, g, brick.getX()+32, brick.getY()+32);
         
     }
     
