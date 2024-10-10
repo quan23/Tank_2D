@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Window window = new Window("1");
         window.setIconImage(new ImageIcon("player1_tank_up.png").getImage());
+        System.out.printf("1");
         
         
     }
