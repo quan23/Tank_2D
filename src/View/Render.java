@@ -28,6 +28,7 @@ public class Render extends JPanel{
         brick.getIcon().paintIcon(this, g, brick.getX(), brick.getY());
         g2d.rotate(Math.toRadians(30.0));
         player.getIcon().paintIcon(this, g, brick.getX(), brick.getY());
+        player.getIcon().paintIcon(this, g, brick.getX()+50, brick.getY()+50);
         g2d.setTransform(old);
         
     }
