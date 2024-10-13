@@ -1,6 +1,6 @@
 
 package Model;
 
-public class StaticIcon {
+public class Weapon {
     
 }
