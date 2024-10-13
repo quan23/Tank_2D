@@ -4,18 +4,19 @@ package Model;
 import java.awt.event.KeyEvent;
 
 public class Player extends Objects{
-    private int up;
-    private int down;
-    private int right;
-    private int left;
+    Health health;
+    HitBox hitBox;
+    StaticIcon icon;
 
-    public Player(int x, int y, String IconLink, int layer) {
-        super(x, y, IconLink, layer);
+    public Player() {
     }
-
-    public Player(int x, int y, String IconLink) {
-        super(x, y, IconLink);
+    
+    
+    @Override
+    public void render() {
+        
     }
-
+    
+    
     
 }
