@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Map {
-    private ArrayList<Objects> objList;
+    private final ArrayList<Objects> objList;
     public Map() {
         objList = new ArrayList();
     }

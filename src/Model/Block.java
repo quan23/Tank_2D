@@ -6,14 +6,12 @@ import java.util.function.Function;
 
 
 public class Block extends Objects{
-
-    public Block(int x, int y, String IconLink, int layer) {
-        super(x, y, IconLink, layer);
-    }
-
-    
+    StaticIcon Icon;
+    HitBox hitBox;
     @Override
-    public boolean damageObj(Objects obj) {
-        return true;
+    public void render() {
     }
+    
+    
+
 }
