@@ -1,11 +1,10 @@
 package Controller;
 
-import Model.Player;
-import View.Render;
+import View.Frame;
 import View.Window;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 
 /*
  * @author hongq
@@ -17,12 +16,9 @@ public class Main {
     public static void main(String[] args) {
         Window window = new Window("1");
         window.setIconImage(new ImageIcon("player1_tank_up.png").getImage());
-        System.out.printf("1");
-        
-        if (true)
-        System.out.printf("2");
-        //nhat quang ngu nhu bo
+        Frame render = new Frame(new Dimension(window.getBounds().width,window.getBounds().height));
+        window.add(render);
+        window.setVisible(true);
     }
     
 }
-
