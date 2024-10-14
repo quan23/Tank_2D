@@ -18,7 +18,7 @@ public class AnimatedIcon extends ObjIcon{
     
     
     @Override
-    public void draw(Component c, Graphics g) {
+    public void render(Component c, Graphics g) {
         animation.get(onFrame++).paintIcon(c, g, x, y);
         onFrame%=frameNumber;
     }

@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 
 
-public class Block extends Objects{
+public class Block extends Entity{
     ObjIcon Icon;
     HitBox hitBox;
 
@@ -25,8 +25,16 @@ public class Block extends Objects{
     }
 
     @Override
+    public void setCoor(int x, int y) {
+        super.setCoor(x, y);
+        Icon.setCoor(x, y);
+    }
+    
+    
+
+    @Override
     public void render(Component c, Graphics g) {
-        Icon.draw(c, g);
+        Icon.render(c, g);
     }
     
     

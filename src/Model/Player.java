@@ -7,7 +7,7 @@ import Model.Component.Health;
 import java.awt.Component;
 import java.awt.Graphics;
 
-public class Player extends Objects{
+public class Player extends Entity{
     Health health;
     HitBox hitBox;
     ObjIcon icon;
@@ -39,9 +39,8 @@ public class Player extends Objects{
 
     @Override
     public void render(Component c, Graphics g) {
-        icon.draw(c, g);
+        icon.render(c, g);
     }
-    
-    
+
     
 }

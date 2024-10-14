@@ -18,7 +18,7 @@ public class StaticIcon extends ObjIcon{
     
 
     @Override
-    public void draw(Component c, Graphics g) {
+    public void render(Component c, Graphics g) {
         Icon.paintIcon(c, g, x, y);
     }
     
