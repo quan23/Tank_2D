@@ -3,6 +3,8 @@ package Model;
 
 import Model.Component.ObjIcon;
 import Model.Component.HitBox;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.util.function.Function;
 
 
@@ -10,8 +12,21 @@ import java.util.function.Function;
 public class Block extends Objects{
     ObjIcon Icon;
     HitBox hitBox;
+
+    public Block() {
+    }
+
+    public void setIcon(ObjIcon Icon) {
+        this.Icon = Icon;
+    }
+
+    public void setHitBox(HitBox hitBox) {
+        this.hitBox = hitBox;
+    }
+
     @Override
-    public void render() {
+    public void render(Component c, Graphics g) {
+        Icon.draw(c, g);
     }
     
     

@@ -1,24 +1,18 @@
 
 package View;
 
-import Model.Block;
-import Model.Player;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
 public class Frame extends JPanel{
     
-    public Frame(Dimension dimen) {
+    public Frame(int x,int y,int u,int v) {
         super();
-        this.setPreferredSize(dimen);
-        this.setBounds(100,100,dimen.width,dimen.height);
+        //this.setPreferredSize(dimen);
+        this.setBounds(x,y,u,v);
         this.setBackground(Color.red);
         
         this.setDoubleBuffered(true);
