@@ -1,21 +1,37 @@
 
 package Model.Component;
 
-import Model.Entity;
-import java.awt.Component;
-import java.awt.Graphics;
+import Model.Methods.EntityCoor;
 
-public abstract class HitBox{
+
+public abstract class HitBox implements EntityCoor{
     protected int x,y;
+    
     protected int sqr(int x) {
         return x*x;
     }
+
+    @Override
+    public void move(int x, int y) {
+        this.x=x;
+        this.y=y;
+    }
+    
+    @Override
     public void setCoor(int x,int y) {
         this.x=x;
         this.y=y;
     }
     
-    
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
     public abstract boolean checkCollison(HitCircle target);
     public abstract boolean checkCollison(HitRectangle target);
     

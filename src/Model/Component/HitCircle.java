@@ -17,4 +17,7 @@ public class HitCircle extends HitBox{
     public boolean checkCollison(HitRectangle target) {
         return target.checkCollison(this);
     }
+
+
+
 }

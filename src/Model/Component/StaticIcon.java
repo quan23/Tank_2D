@@ -21,6 +21,7 @@ public class StaticIcon extends ObjIcon{
     public void paint(Component c, Graphics g) {
         Icon.paintIcon(c, g, x, y);
     }
+
     
     
 }

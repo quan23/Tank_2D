@@ -1,12 +1,11 @@
 
 package View;
 
-import Model.Component.ObjIcon;
-import Model.EntityMethods;
+import Model.Entity;
 import Model.Map;
+import Model.Methods.EntityPaint;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
@@ -26,8 +25,11 @@ public class Frame extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(EntityMethods E:map.getObjList()) {
-            E.paint(this, g);
+        for(Entity E:map.getObjList()) {
+            if (E instanceof EntityPaint Ep) {
+                Ep.paint(this, g);
+            }
+                
         }
     }
     

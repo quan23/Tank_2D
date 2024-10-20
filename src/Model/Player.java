@@ -4,15 +4,17 @@ package Model;
 import Model.Component.ObjIcon;
 import Model.Component.HitBox;
 import Model.Component.Health;
+import Model.Methods.EntityCoor;
+import Model.Methods.EntityPaint;
 import java.awt.Component;
 import java.awt.Graphics;
 
-public class Player extends Entity{
-    Health health;
-    HitBox hitBox;
-    ObjIcon icon;
-    Weapon temporWeapon;
-    Weapon defaultWeapon;
+public class Player extends Entity implements EntityPaint{
+    private Health health;
+    private HitBox hitBox;
+    private ObjIcon icon;
+    private Weapon temporWeapon;
+    private Weapon defaultWeapon;
 
     public Player() {
     }
@@ -48,6 +50,7 @@ public class Player extends Entity{
         icon.setCoor(x, y);
         hitBox.setCoor(x, y);
     }
+    @Override
     public void move(int x,int y) {
         this.x+=x;
         this.y+=y;

@@ -3,13 +3,14 @@ package Model;
 
 import Model.Component.ObjIcon;
 import Model.Component.HitBox;
+import Model.Methods.EntityPaint;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.util.function.Function;
 
 
 
-public class Block extends Entity{
+public class Block extends Entity implements EntityPaint{
     ObjIcon Icon;
     HitBox hitBox;
 

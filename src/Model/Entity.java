@@ -1,19 +1,31 @@
 package Model;
 
-import java.awt.Component;
-import java.awt.Graphics;
+import Model.Methods.EntityCoor;
+import Model.Methods.EntityPaint;
 
-public abstract class Entity implements EntityMethods{
-    int x,y;
-
-    public Entity() {
-        this.y = 0;
-        this.x = 0;
+public abstract class Entity implements EntityCoor{
+    protected int x,y;
+    
+    @Override
+    public void move(int x, int y) {
+        this.x=x;
+        this.y=y;
     }
+    
     @Override
     public void setCoor(int x,int y) {
         this.x=x;
         this.y=y;
+    }
+    
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
     
 }

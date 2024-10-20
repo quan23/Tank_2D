@@ -1,12 +1,9 @@
 
-package Model;
+package Model.Methods;
 
 import java.awt.Component;
 import java.awt.Graphics;
 
-
-public interface EntityMethods {
-    public void setCoor(int x,int y);
-    
+public interface EntityPaint extends EntityCoor{
     public void paint(Component c,Graphics g);
 }
