@@ -3,11 +3,15 @@ package Model;
 import java.util.ArrayList;
 
 public class Map {
-    private final ArrayList<Entity> objList;
+    private ArrayList<Entity> objList;
     public Map() {
         objList = new ArrayList();
     }
 
+    public void setObjList(ArrayList<Entity> objList) {
+        this.objList = objList;
+    }
+    
     public ArrayList<Entity> getObjList() {
         return objList;
     }
@@ -19,6 +23,6 @@ public class Map {
     public void deleteObject(Entity obj) {
         objList.remove(obj);
     }
-    
+
     
 }

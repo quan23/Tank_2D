@@ -33,8 +33,8 @@ public class Block extends Entity{
     
 
     @Override
-    public void render(Component c, Graphics g) {
-        Icon.render(c, g);
+    public void paint(Component c, Graphics g) {
+        Icon.paint(c, g);
     }
     
     

@@ -5,18 +5,14 @@ import Model.Entity;
 import java.awt.Component;
 import java.awt.Graphics;
 
-public abstract class HitBox extends Entity{
+public abstract class HitBox{
     protected int x,y;
     protected int sqr(int x) {
         return x*x;
     }
-    public void setPosision(int x,int y) {
+    public void setCoor(int x,int y) {
         this.x=x;
         this.y=y;
-    }
-
-    @Override
-    public void render(Component c, Graphics g) {
     }
     
     

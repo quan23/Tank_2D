@@ -1,10 +1,5 @@
 package Controller;
 
-import Model.Map;
-import View.Frame;
-import View.Window;
-import java.awt.Dimension;
-import javax.swing.ImageIcon;
 
 
 /*
@@ -13,13 +8,14 @@ import javax.swing.ImageIcon;
 public class Main {
 
     public static void main(String[] args) {
-        Window window = new Window("1");
-        window.setIconImage(new ImageIcon("player1_tank_up.png").getImage());
-        Map map = new Map();
-        Frame render = new Frame(0,0,window.getHeight(),window.getHeight());;
-        window.add(render);
-        window.setVisible(true);
-        
+        GameControl gc = new GameControl();
+        gc.startGame();
+//        window.setIconImage(new ImageIcon("player1_tank_up.png").getImage());
+//        Map map = new Map();
+//        Frame render = new Frame(0,0,window.getHeight(),window.getHeight());
+//        window.add(render);
+//        window.setVisible(true);
+
     }
     
 }

@@ -38,9 +38,22 @@ public class Player extends Entity{
     }
 
     @Override
-    public void render(Component c, Graphics g) {
-        icon.render(c, g);
+    public void paint(Component c, Graphics g) {
+        icon.paint(c, g);
     }
+
+    @Override
+    public void setCoor(int x, int y) {
+        super.setCoor(x, y);
+        icon.setCoor(x, y);
+        hitBox.setCoor(x, y);
+    }
+    public void move(int x,int y) {
+        this.x+=x;
+        this.y+=y;
+        setCoor(this.x, this.y);
+    }
+    
 
     
 }
