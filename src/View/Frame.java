@@ -32,7 +32,6 @@ public class Frame extends JPanel{
                 
         }
     }
-    
     public void setMap(Map map) {
         this.map = map;
     }

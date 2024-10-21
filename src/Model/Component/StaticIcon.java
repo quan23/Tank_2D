@@ -15,7 +15,10 @@ public class StaticIcon extends ObjIcon{
         super(sizeX,sizeY);
         Icon=new ImageIcon(new ImageIcon(IconLink).getImage().getScaledInstance(sizeX, sizeY, Image.SCALE_DEFAULT));
     }
-    
+    public StaticIcon(int sizeX,int sizeY,ImageIcon iIcon) {
+        super(sizeX, sizeY);
+        Icon=new ImageIcon(iIcon.getImage());
+    }
 
     @Override
     public void paint(Component c, Graphics g) {
