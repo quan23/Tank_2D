@@ -2,11 +2,8 @@ package Controller;
 
 import Model.Component.Health;
 import Model.Component.HitRectangle;
-import Model.Component.ObjIcon;
 import Model.Component.StaticIcon;
-import Model.Entity;
 import Model.Map;
-import Model.Methods.EntityCoor;
 import Model.Player;
 import View.Frame;
 import View.Window;
@@ -77,15 +74,15 @@ public class GameControl implements Runnable {
     }
     private void update() {
         if(input.getKeyStatus(KeyEvent.VK_W)){
-                player1.move(0, -1);   
+                player1.goForward();
         }  
          if(input.getKeyStatus(KeyEvent.VK_S)){
-                player1.move(0, 1);   
+                player1.goForward();
         } if(input.getKeyStatus(KeyEvent.VK_D)){
-                player1.move(1, 0);   
+                player1.turn(1);
         }
          if(input.getKeyStatus(KeyEvent.VK_A)){
-                player1.move(-1, 0);   
+                player1.turn(-1);
         }
          
     }

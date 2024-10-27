@@ -4,10 +4,10 @@ package Model;
 import Model.Component.ObjIcon;
 import Model.Component.HitBox;
 import Model.Component.StaticIcon;
-import Model.Methods.EntityPaint;
 import java.awt.Component;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
+import Model.Methods.EntityPaint;
 
 public final class Block extends Entity implements EntityPaint{
     ObjIcon Icon;
@@ -42,8 +42,18 @@ public final class Block extends Entity implements EntityPaint{
     
 
     @Override
-    public void paint(Component c, Graphics g) {
+    public void paint(Component c, Graphics2D g) {
         Icon.paint(c, g);
+    }
+
+    @Override
+    public void setTan(double tan) {
+        this.Icon.setTan(tan);
+    }
+
+    @Override
+    public void turn(double tan) {
+        this.Icon.turn(tan);
     }
     
     

@@ -5,7 +5,7 @@ import Model.Methods.EntityPaint;
 
 public abstract class Entity implements EntityCoor{
     protected int x,y;
-    
+
     @Override
     public void move(int x, int y) {
         this.x+=x;

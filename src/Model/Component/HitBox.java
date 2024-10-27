@@ -2,9 +2,10 @@
 package Model.Component;
 
 import Model.Methods.EntityCoor;
+import Model.Methods.EntityHitBox;
 
 
-public abstract class HitBox implements EntityCoor{
+public abstract class HitBox implements EntityCoor,EntityHitBox{
     protected int x,y;
     
     protected int sqr(int x) {
@@ -34,5 +35,13 @@ public abstract class HitBox implements EntityCoor{
     }
     public abstract boolean checkCollison(HitCircle target);
     public abstract boolean checkCollison(HitRectangle target);
+    
+    @Override
+    public boolean checkCollison(HitBox target) {
+        if (target==null) return false;
+        else if (target instanceof HitCircle T) this.checkCollison(T);
+        else if (target instanceof HitRectangle T) this.checkCollison(T);
+        return false;
+    }
     
 }

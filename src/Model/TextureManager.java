@@ -17,7 +17,7 @@ public class TextureManager {
     }
     public void getTileImage()
     {
-       iconList[0] = new ImageIcon(new ImageIcon("Minecraft-bricks.jpg").getImage().getScaledInstance(32, 4, Image.SCALE_DEFAULT));
+       iconList[0] = new ImageIcon(new ImageIcon("Minecraft-bricks.jpg").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
        iconList[1] = new ImageIcon(new ImageIcon("pathway.jpg").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
     }
     public ImageIcon getImage(int id){

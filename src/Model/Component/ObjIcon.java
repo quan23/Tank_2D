@@ -8,6 +8,7 @@ import Model.Methods.EntityPaint;
 public abstract class ObjIcon implements EntityPaint,EntityCoor{
     protected int x,y;
     protected final int sizeX,sizeY;
+    protected double Tan=0.0f;
 
     public ObjIcon(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -35,4 +36,16 @@ public abstract class ObjIcon implements EntityPaint,EntityCoor{
     public int getY() {
         return y;
     }
+
+    @Override
+    public void setTan(double tan) {
+        this.Tan=tan;
+    }
+
+    @Override
+    public void turn(double tan) {
+        this.Tan+=tan;
+    }
+    
+    
 }

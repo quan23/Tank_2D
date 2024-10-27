@@ -10,13 +10,15 @@ public class HitCircle extends HitBox{
 
     @Override
     public boolean checkCollison(HitCircle target) {
-        return sqr(radius+((HitCircle)target).radius)<=sqr(x-target.x)+sqr(y-target.y);
+        return sqr(radius+target.radius)<=sqr(x-target.x)+sqr(y-target.y);
     }
 
     @Override
     public boolean checkCollison(HitRectangle target) {
         return target.checkCollison(this);
     }
+
+    
 
 
 

@@ -1,4 +1,3 @@
-
 package Model.Component;
 
 public class HitRectangle extends HitBox{

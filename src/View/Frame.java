@@ -3,10 +3,11 @@ package View;
 
 import Model.Entity;
 import Model.Map;
-import Model.Methods.EntityPaint;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import Model.Methods.EntityPaint;
 
 
 public class Frame extends JPanel{
@@ -24,10 +25,11 @@ public class Frame extends JPanel{
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+        super.paintComponent(g2d);
         for(Entity E:map.getObjList()) {
             if (E instanceof EntityPaint Ep) {
-                Ep.paint(this, g);
+                Ep.paint(this, g2d);
             }
                 
         }
