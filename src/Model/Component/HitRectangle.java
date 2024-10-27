@@ -31,5 +31,11 @@ public class HitRectangle extends HitBox{
         int v2=target.y+target.v/2;
         return x1<=u2&&u1>=x2&&y1<=v2&&v1>=y2;
     }
-    
+      @Override
+    public boolean checkCollison(HitBox target) {
+        if (target==null) return false;
+        else if (target instanceof HitCircle T) return this.checkCollison(T);
+        else if (target instanceof HitRectangle T) return this.checkCollison(T);
+        return false;
+    }
 }

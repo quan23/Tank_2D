@@ -4,12 +4,13 @@ package Model;
 import Model.Component.ObjIcon;
 import Model.Component.HitBox;
 import Model.Component.StaticIcon;
+import Model.Methods.EntityHitBox;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import Model.Methods.EntityPaint;
 
-public final class Block extends Entity implements EntityPaint{
+public final class Block extends Entity implements EntityPaint,EntityHitBox{
     ObjIcon Icon;
     HitBox hitBox;
     
@@ -31,12 +32,23 @@ public final class Block extends Entity implements EntityPaint{
 
     public void setHitBox(HitBox hitBox) {
         this.hitBox = hitBox;
+ 
+        
     }
 
+    public HitBox getHitBox() {
+        return hitBox;
+    }
+
+    public ObjIcon getIcon() {
+        return Icon;
+    }
+    
     @Override
     public void setCoor(int x, int y) {
         super.setCoor(x, y);
         Icon.setCoor(x, y);
+        if(hitBox!=null)hitBox.setCoor(x, y);
     }
     
     
@@ -55,7 +67,21 @@ public final class Block extends Entity implements EntityPaint{
     public void turn(double tan) {
         this.Icon.turn(tan);
     }
-    
+
+    @Override
+    public boolean checkCollison(HitBox target) {
+        if (this.hitBox==null) return false;
+        if (target==null) return false;
+        return this.hitBox.checkCollison(target);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
     
 
 }

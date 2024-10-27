@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Component.HitRectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,11 +42,14 @@ public class Map {
                     String[] line = scanner.nextLine().split(" ");
                     for(int j = 0;j<21;j++)
                     {
-                        if(line[j].equals("0")){
-                            objList.add(new Block(j*32,i*32,txtMana.getImage(0)));
+                        if(line[j].equals("1")){
+                            objList.add(new Block(j*32,i*32,txtMana.getImage(1)));
                         }
                         else {
-                            objList.add(new Block(j*32,i*32,txtMana.getImage(1)));
+                            Block bl = new Block(j*32,i*32,txtMana.getImage(0));
+                            bl.setHitBox(new HitRectangle(32,32));
+                            bl.setCoor(j*32, i*32);
+                            objList.add(bl);           
                         }
                     }
                     i++;

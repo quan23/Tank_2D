@@ -44,14 +44,14 @@ public class Player extends Entity implements EntityPaint,EntityHitBox{
         return hitBox;
     }
     
-    public void goForward() {
-        realX+=this.Speed*Math.sin(Math.toRadians(Tan));
-        realY-=this.Speed*Math.cos(Math.toRadians(Tan));
+    public void goForward(int dx,int dy) {
+        realX+=dx*this.Speed*Math.sin(Math.toRadians(Tan));
+        realY-=dy*this.Speed*Math.cos(Math.toRadians(Tan));
         super.setCoor((int)realX, (int)realY);
         icon.setCoor((int)realX, (int)realY);
         hitBox.setCoor((int)realX, (int)realY);
     }
-    
+   
     @Override
     public void paint(Component c, Graphics2D g) {
         icon.paint(c, g);

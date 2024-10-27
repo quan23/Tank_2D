@@ -36,12 +36,6 @@ public abstract class HitBox implements EntityCoor,EntityHitBox{
     public abstract boolean checkCollison(HitCircle target);
     public abstract boolean checkCollison(HitRectangle target);
     
-    @Override
-    public boolean checkCollison(HitBox target) {
-        if (target==null) return false;
-        else if (target instanceof HitCircle T) this.checkCollison(T);
-        else if (target instanceof HitRectangle T) this.checkCollison(T);
-        return false;
-    }
+  
     
 }
