@@ -8,8 +8,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.border.EmptyBorder;
 
 public class MapEditor extends JFrame {
+
     private static final int SIZE = 21;
     private JCheckBox[][] checkboxes = new JCheckBox[SIZE][SIZE];
     private List<String> savedFiles;
@@ -24,7 +26,7 @@ public class MapEditor extends JFrame {
         JPanel matrixPanel = new JPanel(new GridLayout(SIZE, SIZE));
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                checkboxes[i][j] = new JCheckBox();
+                checkboxes[i][j] = createCustomCheckbox(); // Sử dụng checkbox tùy chỉnh
                 matrixPanel.add(checkboxes[i][j]);
             }
         }
@@ -68,8 +70,25 @@ public class MapEditor extends JFrame {
 
         loadSavedFiles();
 
-        setSize(599, 599);
+        //setSize(800, 800);
         setLocationRelativeTo(null);
+        pack();
+    }
+
+    private JCheckBox createCustomCheckbox() {
+        JCheckBox checkBox = new JCheckBox();
+        // Tải hình ảnh cho checkbox
+        ImageIcon icon = new ImageIcon(new ImageIcon("pathway.jpg").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)); // Hình ảnh cho trạng thái chưa chọn
+        ImageIcon selectedIcon = new ImageIcon(new ImageIcon("Minecraft-Bricks.jpg").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)); // Hình ảnh cho trạng thái đã chọn
+
+        checkBox.setIcon(icon);
+        checkBox.setSelectedIcon(selectedIcon);
+        checkBox.setBorderPainted(false); // Tắt viền để chỉ hiển thị hình ảnh
+        checkBox.setContentAreaFilled(false); // Tắt nền
+        checkBox.setFocusPainted(false); // Tắt viền khi có focus
+        checkBox.setBorder(new EmptyBorder(0, 0, 0, 0)); // Giảm khoảng cách giữa các checkbox
+        checkBox.setPreferredSize(new Dimension(32, 32)); // Điều chỉnh kích thước checkbox
+        return checkBox;
     }
 
     private void loadSavedFiles() {
@@ -97,7 +116,9 @@ public class MapEditor extends JFrame {
     private void saveToFile() {
         if (currentFile == null) {
             currentFile = JOptionPane.showInputDialog(this, "Nhập tên file:", "Save As", JOptionPane.PLAIN_MESSAGE);
-            if (currentFile == null || currentFile.isEmpty()) return;
+            if (currentFile == null || currentFile.isEmpty()) {
+                return;
+            }
             currentFile = currentFile.endsWith(".txt") ? currentFile : currentFile + ".txt";
         }
 
@@ -105,11 +126,15 @@ public class MapEditor extends JFrame {
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     writer.write(checkboxes[i][j].isSelected() ? "0" : "1");
-                    if (j < SIZE - 1) writer.write(" ");
+                    if (j < SIZE - 1) {
+                        writer.write(" ");
+                    }
                 }
                 writer.newLine();
             }
-            if (!savedFiles.contains(currentFile)) savedFiles.add(currentFile);
+            if (!savedFiles.contains(currentFile)) {
+                savedFiles.add(currentFile);
+            }
             JOptionPane.showMessageDialog(this, "Đã lưu trạng thái vào file " + currentFile);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Lỗi khi lưu file: " + ex.getMessage());
