@@ -25,6 +25,7 @@ public final class Block extends Entity implements EntityPaint,EntityHitBox{
     public void setIcon(ObjIcon Icon) {
         this.Icon = Icon;
     }
+    @Override
     public void move(int x,int y) {
         super.move(x, y);
         setCoor(this.x, this.y);
@@ -36,6 +37,7 @@ public final class Block extends Entity implements EntityPaint,EntityHitBox{
         
     }
 
+    @Override
     public HitBox getHitBox() {
         return hitBox;
     }

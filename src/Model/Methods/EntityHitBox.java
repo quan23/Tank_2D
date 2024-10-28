@@ -4,5 +4,6 @@ import Model.Component.HitBox;
 
 public interface EntityHitBox {
 
-    public abstract boolean checkCollison(HitBox target);
+    public boolean checkCollison(HitBox target);
+    public HitBox getHitBox();
 }

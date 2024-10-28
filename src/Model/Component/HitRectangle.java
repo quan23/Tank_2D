@@ -16,7 +16,7 @@ public class HitRectangle extends HitBox{
         int x2=Integer.max(Integer.min(target.x,u1),x1);
         int y2=Integer.max(Integer.min(target.y,v1),y1);
         if (x2==target.x&&y2==target.y) return true;
-        return sqr(target.x-x2)+sqr(target.y-y2)<=target.radius;        
+        return sqr(target.x-x2)+sqr(target.y-y2)<=sqr(target.radius);        
     }
 
     @Override

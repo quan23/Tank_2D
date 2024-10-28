@@ -40,6 +40,7 @@ public class Player extends Entity implements EntityPaint,EntityHitBox{
         return health;
     }
 
+    @Override
     public HitBox getHitBox() {
         return hitBox;
     }

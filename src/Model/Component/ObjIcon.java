@@ -1,14 +1,13 @@
-
 package Model.Component;
 
 import Model.Methods.EntityCoor;
 import Model.Methods.EntityPaint;
 
+public abstract class ObjIcon implements EntityPaint, EntityCoor {
 
-public abstract class ObjIcon implements EntityPaint,EntityCoor{
-    protected int x,y;
-    protected final int sizeX,sizeY;
-    protected double Tan=0.0f;
+    protected int x, y;
+    protected final int sizeX, sizeY;
+    protected double Tan = 0.0f;
 
     public ObjIcon(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -17,16 +16,16 @@ public abstract class ObjIcon implements EntityPaint,EntityCoor{
 
     @Override
     public void move(int x, int y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
     }
-    
+
     @Override
-    public void setCoor(int x,int y) {
-        this.x=x;
-        this.y=y;
+    public void setCoor(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
-    
+
     @Override
     public int getX() {
         return x;
@@ -39,13 +38,12 @@ public abstract class ObjIcon implements EntityPaint,EntityCoor{
 
     @Override
     public void setTan(double tan) {
-        this.Tan=tan;
+        this.Tan = tan;
     }
 
     @Override
     public void turn(double tan) {
-        this.Tan+=tan;
+        this.Tan += tan;
     }
-    
-    
+
 }
