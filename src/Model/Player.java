@@ -20,10 +20,19 @@ public class Player extends Entity implements EntityPaint,EntityHitBox{
     private Weapon defaultWeapon;
     private double Tan,Speed=1.2;
     private double realX=x,realY=y;
-
+    private boolean shot=true;
     public Player() {
+        
     }
-
+    public Bullet shoot(){
+        if (shot)
+        {
+            //shot=!shot;
+            return new Bullet(this.x+14, this.y+14, this.Tan);
+            
+        }
+        return null;
+    }
     public void setHealth(Health health) {
         this.health = health;
     }

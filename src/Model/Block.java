@@ -77,10 +77,12 @@ public final class Block extends Entity implements EntityPaint,EntityHitBox{
         return this.hitBox.checkCollison(target);
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }

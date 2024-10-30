@@ -1,17 +1,15 @@
 package Model;
 
 import Model.Component.HitRectangle;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Map {
+public final class Map {
     private ArrayList<Entity> objList;
     TextureManager txtMana;
     public Map() {
@@ -23,15 +21,16 @@ public class Map {
         this.objList = objList;
     }
     
-    public ArrayList<Entity> getObjList() {
+    public  ArrayList<Entity> getObjList() {
         return objList;
     }
     
-    public void addObject(Entity obj) {
+    public  void addObject(Entity obj) {
+        if (obj!=null)
         objList.add(obj);
     }
     
-    public void deleteObject(Entity obj) {
+    public  void deleteObject(Entity obj) {
         objList.remove(obj);
     }
     public void loadMap(String link) throws IOException{
