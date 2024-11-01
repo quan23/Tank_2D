@@ -1,6 +1,8 @@
 package Model.Component;
 
-public class Health {
+import Model.Methods.EntityHealth;
+
+public class Health implements EntityHealth{
 
     private int health;
     private final int mHealth;

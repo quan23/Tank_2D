@@ -22,7 +22,7 @@ public class StaticIcon extends ObjIcon {
 
     @Override
     public void paint(Component c, Graphics2D g) {
-        AffineTransform at = AffineTransform.getTranslateInstance(x, y);
+        AffineTransform at = AffineTransform.getTranslateInstance(x-sizeX/2, y-sizeY/2);
         at.rotate(Math.toRadians(Tan), sizeX / 2, sizeY / 2);
         g.drawImage(Icon.getImage(), at, c);
     }

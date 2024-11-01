@@ -9,11 +9,11 @@ import javax.swing.JPanel;
 import Model.Methods.EntityPaint;
 import java.awt.Dimension;
 
-public class Frame extends JPanel {
+public class GameFrame extends JPanel {
 
     private Map map;
 
-    public Frame(int x, int y, int u, int v) {
+    public GameFrame(int x, int y, int u, int v) {
         super();
         this.setPreferredSize(new Dimension(u-x,v-y));
         this.setBounds(x, y, u, v);

@@ -10,7 +10,7 @@ import Model.Entity;
 import Model.Map;
 import Model.Methods.EntityHitBox;
 import Model.Player;
-import View.Frame;
+import View.GameFrame;
 import View.Window;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public final class GameControl implements Runnable {
     private Map map;
     private UserInput input;
     private Window gameW;
-    private Frame fmap;
+    private GameFrame fmap;
     private Player player1, player2;
     private Thread gameThread;
 
@@ -32,11 +32,11 @@ public final class GameControl implements Runnable {
         map = new Map();
         input = new UserInput();
         gameW = new Window();
-        fmap = new Frame(0, 0, 672, 672);
+        fmap = new GameFrame(0, 0, 672, 672);
         fmap.setMap(map);
         gameW.add(fmap);
         gameW.addKeyListener(input);
-        //gameW.pack();
+        gameW.pack();
         player1 = new Player();
         player1.setHealth(new Health(100, 100));
         player1.setIcon(new StaticIcon(32, 32, "player1_tank_up.png"));
@@ -79,21 +79,27 @@ public final class GameControl implements Runnable {
         player.goForward(x, y);
         for (Entity e : map.getObjList()) {
             if ((e instanceof EntityHitBox b) && (b != player)) {
-                if ((b.getHitBox() != null) && b.getHitBox().checkCollison(player.getHitBox())&&!(b instanceof Bullet)) {
-
-                    player.goForward(-x, -y);
+                if ((b.getHitBox() != null) && player.getHitBox().checkCollison(b.getHitBox())) {
+                    if (!(b instanceof Bullet)) {
+                        player.goForward(-x, -y);
+                    }
                 }
             }
 
         }
     }
 
-    public boolean bulletCollisionUpdate(Bullet b) {
-        b.goForward();
+    public boolean bulletCollisionUpdate(double x, double y, Bullet b) {
+        b.goForward(x, y);
         for (Entity e : map.getObjList()) {
-            if ((e instanceof EntityHitBox eH) && e != b && !(e instanceof Player) && !(e instanceof Bullet)) {
-                if (b.getHitBox() != null && b.getHitBox().checkCollison(eH.getHitBox())) {
+            if ((e instanceof EntityHitBox eH) && b.getHitBox() != null && b.getHitBox().checkCollison(eH.getHitBox()) && !(e instanceof Bullet)) {
+                if ((e instanceof Player p)) {
+                    //System.out.println(b.getX() + " " + b.getY());
+                    b.dealDamage(p);
                     return true;
+                } else {
+                    b.goForward(-x, -y);
+                    return b.collide(x, y);
                 }
             }
         }
@@ -122,13 +128,14 @@ public final class GameControl implements Runnable {
         while (iterator.hasNext()) {
             Entity e = iterator.next();
             if (e instanceof Bullet b) {
-//                System.out.println(b.getHitBox().getX()+" "+b.getHitBox().getY());
-                if (bulletCollisionUpdate(b))
+                boolean checkTime = b.countDown();
+                if ((bulletCollisionUpdate(0, 1, b) || bulletCollisionUpdate(1, 0, b)) || checkTime) {
                     iterator.remove();
+                }
             }
         }
+        player1.update();
     }
-    
 
     private void repaint() {
         fmap.repaint();
