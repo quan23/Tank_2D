@@ -18,7 +18,7 @@ public class MapEditor extends JFrame {
     private String currentFile = null;
 
     public MapEditor() {
-        setTitle("Checkbox Matrix 21x21");
+        setTitle("Map Editor 21x21");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -39,26 +39,33 @@ public class MapEditor extends JFrame {
         saveButton.addActionListener(e -> saveToFile());
 
         JTextField rowField = new JTextField(2); // Nhập số hàng
+        rowField.setMaximumSize(new Dimension(300, 20));
         JButton selectRowButton = new JButton("Select Row");
-        selectRowButton.addActionListener(e -> selectRow(rowField.getText(), true));
+        selectRowButton.addActionListener(e -> selectAll(true, rowField.getText(), true));
 
         JTextField colField = new JTextField(2); // Nhập số cột
+        colField.setMaximumSize(new Dimension(300, 20));
         JButton selectColButton = new JButton("Select Column");
-        selectColButton.addActionListener(e -> selectColumn(colField.getText(), true));
+        selectColButton.addActionListener(e -> selectAll(false, colField.getText(), true));
 
         // Panel chứa các nút
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         buttonPanel.add(newButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(saveButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(new JLabel("Row:"));
         buttonPanel.add(rowField);
         buttonPanel.add(selectRowButton);
+        buttonPanel.add(Box.createVerticalStrut(10));
         buttonPanel.add(new JLabel("Column:"));
         buttonPanel.add(colField);
         buttonPanel.add(selectColButton);
 
         add(matrixPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.EAST);
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -70,8 +77,7 @@ public class MapEditor extends JFrame {
 
         loadSavedFiles();
 
-        //setSize(800, 800);
-        setLocationRelativeTo(null);
+        
         pack();
     }
 
@@ -100,7 +106,7 @@ public class MapEditor extends JFrame {
                     .collect(Collectors.toList());
         } catch (IOException e) {
             savedFiles = new ArrayList<>();
-            JOptionPane.showMessageDialog(this, "Lỗi khi tải danh sách file: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error loading file list: " + e.getMessage());
         }
     }
 
@@ -115,7 +121,7 @@ public class MapEditor extends JFrame {
 
     private void saveToFile() {
         if (currentFile == null) {
-            currentFile = JOptionPane.showInputDialog(this, "Nhập tên file:", "Save As", JOptionPane.PLAIN_MESSAGE);
+            currentFile = JOptionPane.showInputDialog(this, "Enter file name:", "Save As", JOptionPane.PLAIN_MESSAGE);
             if (currentFile == null || currentFile.isEmpty()) {
                 return;
             }
@@ -135,20 +141,20 @@ public class MapEditor extends JFrame {
             if (!savedFiles.contains(currentFile)) {
                 savedFiles.add(currentFile);
             }
-            JOptionPane.showMessageDialog(this, "Đã lưu trạng thái vào file " + currentFile);
+            JOptionPane.showMessageDialog(this, "Save State to File " + currentFile);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi lưu file: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error saving file " + ex.getMessage());
         }
     }
 
     private void openFile() {
-        String[] filesArray = savedFiles.toArray(new String[0]);
+        String[] filesArray = savedFiles.toArray(String[]::new);
         if (filesArray.length == 0) {
-            JOptionPane.showMessageDialog(this, "Không có file nào để mở.");
+            JOptionPane.showMessageDialog(this, "No file available to open.");
             return;
         }
 
-        String fileName = (String) JOptionPane.showInputDialog(this, "Chọn file để mở:", "Open File",
+        String fileName = (String) JOptionPane.showInputDialog(this, "Choose a file to open.:", "Open File",
                 JOptionPane.PLAIN_MESSAGE, null, filesArray, filesArray[0]);
         if (fileName != null) {
             loadFromFile(fileName);
@@ -167,43 +173,29 @@ public class MapEditor extends JFrame {
                 }
                 row++;
             }
-            JOptionPane.showMessageDialog(this, "Đã mở file " + fileName);
+            JOptionPane.showMessageDialog(this, "File opened. " + fileName);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi mở file: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error when opening file: " + ex.getMessage());
         }
     }
 
     // Phương thức chọn/bỏ chọn tất cả các checkbox trong hàng
-    private void selectRow(String rowText, boolean select) {
-        try {
-            int row = Integer.parseInt(rowText);
-            if (row >= 0 && row < SIZE) {
-                for (int j = 0; j < SIZE; j++) {
-                    checkboxes[row][j].setSelected(select);
-                }
+    private void selectAll(boolean isRow, String indexText, boolean select) {
+    try {
+        int index = Integer.parseInt(indexText);
+        if (index >= 0 && index < SIZE) {
+            if (isRow) {
+                for (int j = 0; j < SIZE; j++) checkboxes[index][j].setSelected(select);
             } else {
-                JOptionPane.showMessageDialog(this, "Hàng không hợp lệ!");
+                for (int i = 0; i < SIZE; i++) checkboxes[i][index].setSelected(select);
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập số hợp lệ cho hàng!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid value!");
         }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid number!");
     }
-
-    // Phương thức chọn/bỏ chọn tất cả các checkbox trong cột
-    private void selectColumn(String colText, boolean select) {
-        try {
-            int col = Integer.parseInt(colText);
-            if (col >= 0 && col < SIZE) {
-                for (int i = 0; i < SIZE; i++) {
-                    checkboxes[i][col].setSelected(select);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Cột không hợp lệ!");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Hãy nhập số hợp lệ cho cột!");
-        }
-    }
+}
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
