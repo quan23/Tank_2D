@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import Model.Methods.EntityPaint;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameFrame extends JPanel {
 
@@ -22,17 +24,21 @@ public class GameFrame extends JPanel {
         this.setDoubleBuffered(true);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        super.paintComponent(g2d);
-        for (Entity E : map.getObjList()) {
-            if (E instanceof EntityPaint Ep) {
-                Ep.paint(this, g2d);
-            }
+   @Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    Graphics2D g2d = (Graphics2D) g;
 
+    if (map != null) {
+        List<Entity> entities = new ArrayList<>(map.getObjList()); // Tạo bản sao
+        for (Entity entity : entities) {
+            if (entity instanceof EntityPaint ep) {
+                ep.paint(this, g2d);
+            }
         }
     }
+}
+
 
     public void setMap(Map map) {
         this.map = map;

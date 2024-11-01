@@ -21,7 +21,7 @@ import java.awt.Graphics2D;
  */
 public final class Bullet extends Entity implements EntityCoor,EntityHitBox,EntityPaint{
     private int timeToLive = 600;
-    private double Tan,Speed=2;
+    private double Tan,Speed=3;
     private double realX=x,realY=y;
     private final HitBox hitBox;
     private double dX=1,dY=1;

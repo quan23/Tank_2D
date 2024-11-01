@@ -12,6 +12,14 @@ public class Health implements EntityHealth{
         this.mHealth = mHealth;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getmHealth() {
+        return mHealth;
+    }
+
     public void Damage(int damage) {
         this.health = Integer.max(this.health - damage, 0);
 
