@@ -42,7 +42,7 @@ public final class Bullet extends Entity implements EntityCoor, EntityHitBox, En
         icon = new StaticIcon(8, 8, "bullet.png");
         this.setCoor(x, y);
         this.setTan(tan);
-        bulletPlaySound("bulletsound.wav");
+        bulletPlaySound("piu.wav");
     }
 
     public boolean countDown() {
@@ -110,11 +110,13 @@ public final class Bullet extends Entity implements EntityCoor, EntityHitBox, En
         if (dy != 0) {
             this.dY *= (-dy);
         }
+        bulletPlaySound("bulletsound.wav");
         return false;
     }
 
     public void dealDamage(EntityHealth entity) {
         entity.Damage(damage);
+        bulletPlaySound("bulletsound.wav");
         //System.out.println("damage");
     }
 
