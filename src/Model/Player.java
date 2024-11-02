@@ -15,7 +15,7 @@ public class Player extends Entity implements EntityHealth{
     }
 
     public Bullet shoot() {
-        return defaultWeapon.shoot(x, y, Tan);
+        return defaultWeapon.shoot();
 
     }
     
@@ -34,6 +34,7 @@ public class Player extends Entity implements EntityHealth{
     public void goForward(int dx, int dy) {
         realX += dx * this.Speed * Math.sin(Math.toRadians(Tan));
         realY -= dy * this.Speed * Math.cos(Math.toRadians(Tan));
+        defaultWeapon.setCoor(x, y);
         super.setCoor((int) realX, (int) realY);
     }
 
@@ -42,19 +43,22 @@ public class Player extends Entity implements EntityHealth{
     public void setCoor(int x, int y) {
         realX = x;
         realY = y;
+        defaultWeapon.setCoor(x, y);
         super.setCoor(x, y);
     }
 
 
     @Override
     public void setTan(double tan) {
-        this.Tan = tan;
+        this.Tan=tan;
+        defaultWeapon.setTan(tan);
         super.setTan(tan);
     }
 
     @Override
     public void turn(double tan) {
-        this.Tan += tan;
+        this.Tan+=tan;
+        defaultWeapon.setTan(this.Tan);
         super.setTan(Tan);
     }
 

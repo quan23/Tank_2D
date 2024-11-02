@@ -277,7 +277,9 @@ public void run() {
             Entity e = iterator.next();
             if (e instanceof Bullet b) {
                 boolean checkTime = b.countDown();
-                if ((bulletCollisionUpdate(0, 1, b) || bulletCollisionUpdate(1, 0, b)) || checkTime) {
+                boolean checkX=bulletCollisionUpdate(1, 0, b);
+                boolean checkY=bulletCollisionUpdate(0, 1, b);
+                if ((checkX && checkY) || checkTime) {
                     iterator.remove();
                 }
             }

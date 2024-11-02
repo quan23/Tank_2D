@@ -111,7 +111,7 @@ public final class Bullet extends Entity implements EntityCoor, EntityHitBox, En
             this.dY *= (-dy);
         }
         bulletPlaySound("bulletsound.wav");
-        return false;
+        return true;
     }
 
     public void dealDamage(EntityHealth entity) {
