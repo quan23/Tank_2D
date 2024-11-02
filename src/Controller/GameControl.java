@@ -55,7 +55,7 @@ public final class GameControl implements Runnable {
         player1.setHealth(new Health(100, 100));
         player1.setIcon(new StaticIcon(32, 32, "player1_tank_up.png"));
         player1.setHitBox(new HitCircle(10));
-        player1.setCoor(96, 96);
+        player1.setCoor(50, 50);
 
         player2 = new Player();
         player2.setHealth(new Health(100, 100));
@@ -68,7 +68,7 @@ public final class GameControl implements Runnable {
 
         gameW.pack();
         try {
-            loadMap("checkbox_states.txt");
+            loadMap("default_map.txt");
         } catch (IOException ex) {
             Logger.getLogger(GameControl.class.getName()).log(Level.SEVERE, null, ex);
         }
