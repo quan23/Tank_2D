@@ -18,7 +18,7 @@ public class MachineGun implements Weapon{
             DownTimer=coolDown;
             bulletAmount--;
             if (bulletAmount==0) reloaded=false;
-            return new Bullet(x+(int)(14*Math.sin(Math.toRadians(Tan))), y+(int)(-14*Math.cos(Math.toRadians(Tan))), Tan);
+            return new Bullet(x+(int)(15*Math.sin(Math.toRadians(Tan))), y+(int)(-15*Math.cos(Math.toRadians(Tan))), Tan);
         }
         return null;
     }

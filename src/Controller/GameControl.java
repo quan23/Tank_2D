@@ -58,13 +58,13 @@ public final class GameControl implements Runnable {
         player1 = new Player();
         player1.setHealth(new Health(100, 100));
         player1.setIcon(new StaticIcon(32, 32, "player1_tank_up.png"));
-        player1.setHitBox(new HitCircle(10));
+        player1.setHitBox(new HitRectangle(10, 10));
         player1.setCoor(50, 50);
 
         player2 = new Player();
         player2.setHealth(new Health(100, 100));
         player2.setIcon(new StaticIcon(32, 32, "player2_tank_up.png"));
-        player2.setHitBox(new HitCircle(10));
+        player2.setHitBox(new HitRectangle(10, 10));
         player2.setCoor(602, 602);
         sb = new SideBar();
         initLabels();
@@ -215,6 +215,7 @@ public void run() {
     }
 
     public boolean bulletCollisionUpdate(double x, double y, Bullet b) {
+        if (b.countDown()) return true;
         b.goForward(x, y);
         for (Entity e : map.getObjList()) {
             if ((e instanceof EntityHitBox eH) && b.getHitBox() != null && b.getHitBox().checkCollison(eH.getHitBox()) && !(e instanceof Bullet)) {

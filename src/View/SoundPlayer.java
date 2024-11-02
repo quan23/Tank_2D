@@ -22,7 +22,7 @@ public class SoundPlayer {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
 
-            System.out.println("Playing sound from: " + soundFile.getAbsolutePath());
+            //System.out.println("Playing sound from: " + soundFile.getAbsolutePath());
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println("Error playing sound: " + e.getMessage());
         }

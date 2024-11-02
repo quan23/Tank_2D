@@ -116,6 +116,7 @@ public final class Bullet extends Entity implements EntityCoor, EntityHitBox, En
 
     public void dealDamage(EntityHealth entity) {
         entity.Damage(damage);
+        timeToLive=0;
         bulletPlaySound("bulletsound.wav");
         //System.out.println("damage");
     }
@@ -138,7 +139,7 @@ public final class Bullet extends Entity implements EntityCoor, EntityHitBox, En
             clip.open(audioStream);
             clip.start();
 
-            System.out.println("Playing sound from: " + soundFile.getAbsolutePath());
+            //System.out.println("Playing sound from: " + soundFile.getAbsolutePath());
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println("Error playing sound: " + e.getMessage());
         }
