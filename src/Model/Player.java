@@ -72,5 +72,6 @@ public class Player extends Entity implements EntityHealth{
     public void Heal(int heal) {
         health.Heal(heal);
     }
-
+    
+    
 }

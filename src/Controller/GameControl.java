@@ -12,6 +12,9 @@ import Model.Methods.EntityHitBox;
 import Model.Player;
 import View.GameFrame;
 import View.SideBar;
+import View.SoundPlayer;
+import static View.SoundPlayer.playSound;
+import static View.SoundPlayer.stopSound;
 import View.Window;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,6 +24,7 @@ import java.awt.GridBagConstraints;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -105,30 +109,37 @@ public final class GameControl implements Runnable {
     public void loadMap(String link) throws IOException {
         map.loadMap(link);
         System.out.println("Map load successfully");
+        //playSound("BGM.wav");
     }
 
     public void startGame() {
+         if (gameThread == null || !gameThread.isAlive()) {
         gameThread = new Thread(this);
         gameThread.start();
+        playSound("BGM.wav");
+    }
     }
 
     @Override
-    public void run() {
-        while (gameThread!=null) {
-          
-            update();
-            repaint();
-            if(stopGame()==true){
-                showGameOver();
-                break;
-            }
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(GameControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+public void run() {
+    gameOver = false;
+    while (!gameOver) {
+        
+        update();
+        repaint();
+        if (stopGame()) {
+            stopSound("BGM.wav");
+            showGameOver();
+            break;
         }
- }
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            break;
+        }
+    }
+}
 
     public boolean stopGame() {
         if (player1.Death() || player2.Death()) {
@@ -138,8 +149,56 @@ public final class GameControl implements Runnable {
     }
 
     private void showGameOver() {
-        JOptionPane.showMessageDialog(null, "Game Over!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        int response = JOptionPane.showConfirmDialog(null, "Game Over! Would you like to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+    if (response == JOptionPane.YES_OPTION) {
+        resetGame(); 
+    } else {
+        System.exit(0); 
     }
+    }
+    private void resetGame() {
+    gameOver = false;
+    player1.setCoor(50, 50);
+    player1.setHealth(new Health(100, 100));
+    player1.setTan(0);
+
+    player2.setCoor(602, 602);
+    player2.setHealth(new Health(100, 100));
+    player2.setTan(0);
+
+    map.clearObjects(); 
+
+    try {
+        map.loadMap("default_map.txt"); 
+    } catch (IOException ex) {
+        Logger.getLogger(GameControl.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    map.addObject(player1); 
+    map.addObject(player2);
+
+    player1Info.setText("Player 1 Health: " + player1.getHealth().getHealth());
+    player2Info.setText("Player 2 Health: " + player2.getHealth().getHealth());
+
+    if (gameThread != null && gameThread.isAlive()) {
+        gameThread.interrupt();
+        try {
+            gameThread.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    gameThread = new Thread(this);
+    gameThread.start();
+    playSound("BGM.wav");
+
+    fmap.repaint(); 
+}
+
+
+
+
 
     public void playerCollisionUpdate(int x, int y, Player player) {
         player.goForward(x, y);
@@ -175,10 +234,11 @@ public final class GameControl implements Runnable {
     private void update() {
         //Player1_KeyEvent
         if (input.getKeyStatus(KeyEvent.VK_W)) {
+            
             playerCollisionUpdate(0, 1, player1);
             playerCollisionUpdate(1, 0, player1);
         }
-        if (input.getKeyStatus(KeyEvent.VK_S)) {
+        if (input.getKeyStatus(KeyEvent.VK_S)) {           
             playerCollisionUpdate(0, -1, player1);
             playerCollisionUpdate(-1, 0, player1);
         }
@@ -191,6 +251,7 @@ public final class GameControl implements Runnable {
         }
         if (input.getKeyStatus(KeyEvent.VK_SPACE)) {
             map.addObject(player1.shoot());
+           
         }
         //Player2_KeyEvent
         if (input.getKeyStatus(KeyEvent.VK_UP)) {
